@@ -1,12 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import {toogleMenu} from "../utils/appSlice"
+import { SEARCH_API } from '../utils/constants';
 
 const Head = () => {
+  const [searchQuery, setSearchQuery] = useState("");
   const dispatch = useDispatch();
 
   const togggleMenuHandler=()=>{
     dispatch(toogleMenu())
+  }
+
+  useEffect(() => {
+    getSearchSuggestion();
+  },[searchQuery])
+
+  const getSearchSuggestion = async () => {
+    const data = await fetch(SEARCH_API + searchQuery);
+    const json = await data.json();
+    console.log(json)
+
   }
 
   return (
@@ -17,7 +30,7 @@ const Head = () => {
         </div>
 
         <div className='col-span-8'>
-            <input type='text' className='w-3/5 p-2 border-gray-500 border-2 rounded-l-full'/>
+            <input type='text' value={searchQuery} onChange={(e)=>setSearchQuery(e.target.value)} className='w-3/5 p-2 border-gray-500 border-2 rounded-l-full'/>
             <button className='p-2 border-gray-400 border-2 rounded-r-full'>Search</button>
         </div>
 
