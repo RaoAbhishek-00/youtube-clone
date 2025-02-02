@@ -15,4 +15,13 @@ const VideoCard = ({info}) => {
   )
 }
 
+// higher component function
+export const AdVideoCard = ({info}) => {
+  return(
+    <div className='p-1 m-1 border border-red'>
+      <VideoCard info ={info}/>
+    </div>
+  )
+}
+
 export default VideoCard

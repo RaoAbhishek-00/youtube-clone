@@ -12,13 +12,13 @@ const Head = () => {
   }
 
   useEffect(() => {
-    getSearchSuggestion();
+    setTimeout(()=>getSearchSuggestion(),200);
   },[searchQuery])
 
   const getSearchSuggestion = async () => {
     const data = await fetch(SEARCH_API + searchQuery);
     const json = await data.json();
-    console.log(json)
+    // console.log(json)
 
   }
 
